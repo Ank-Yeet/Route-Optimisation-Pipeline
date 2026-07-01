@@ -1,4 +1,4 @@
-# Intelligent Route Optimization App 🚚
+# NeuroNav 🚚
 
 This application is an end-to-end route optimization system that combines Geographic Information Systems (GIS), Graph Neural Networks (GNNs), and Combinatorial Optimization to solve a dynamic version of the Traveling Salesman Problem (TSP).
 

@@ -7,9 +7,12 @@ const AutocompleteInput = ({ value, onChange, placeholder }) => {
   const [showDropdown, setShowDropdown] = useState(false);
   const [loading, setLoading] = useState(false);
   const wrapperRef = useRef(null);
+  const isSelectedRef = useRef(false);
   
   useEffect(() => {
-    setQuery(value || '');
+    if (value !== undefined && value !== query) {
+      setQuery(value || '');
+    }
   }, [value]);
 
   useEffect(() => {
@@ -25,8 +28,13 @@ const AutocompleteInput = ({ value, onChange, placeholder }) => {
   }, [wrapperRef]);
 
   useEffect(() => {
-    if (!query || query === value) {
+    if (!query) {
       setSuggestions([]);
+      return;
+    }
+    
+    if (isSelectedRef.current) {
+      isSelectedRef.current = false;
       return;
     }
     
@@ -47,16 +55,17 @@ const AutocompleteInput = ({ value, onChange, placeholder }) => {
     }, 500);
 
     return () => clearTimeout(timeoutId);
-  }, [query, value]);
+  }, [query]);
 
   const handleSelect = (suggestion) => {
+    isSelectedRef.current = true;
     setQuery(suggestion.display_name);
     onChange(suggestion.display_name);
     setShowDropdown(false);
   };
 
   return (
-    <div className="autocomplete-wrapper" ref={wrapperRef} style={{ position: 'relative' }}>
+    <div className="autocomplete-wrapper" ref={wrapperRef} style={{ position: 'relative', zIndex: showDropdown ? 100 : 1 }}>
       <div style={{ position: 'relative' }}>
         <input
           type="text"

@@ -69,7 +69,7 @@ function App() {
       {/* Sidebar Overlay */}
       <div className="sidebar glass-panel">
         <div className="sidebar-header">
-          <h1 className="gradient-text">Dynamic Route AI</h1>
+          <h1 className="gradient-text">NeuroNav</h1>
           <p>Smartest sequence, minimum traffic.</p>
         </div>
         

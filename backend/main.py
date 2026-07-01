@@ -24,21 +24,6 @@ class RouteRequest(BaseModel):
     time_of_day: str
     weather: str
 
-@app.get("/api/search")
-def search_location(q: str):
-    headers = {"User-Agent": "RouteOptimizerApp/1.0"}
-    try:
-        response = requests.get(
-            f"https://nominatim.openstreetmap.org/search?q={q}&format=json&limit=5", 
-            headers=headers,
-            timeout=5
-        )
-        if response.status_code == 200:
-            return response.json()
-        return []
-    except Exception as e:
-        print(f"Error searching location: {e}")
-        return []
 
 @app.get("/api/search")
 def search_location(q: str):
